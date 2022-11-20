@@ -1,34 +1,51 @@
-$fn = 120;
+$fn = 100;
 
+//magnet size, height not accurate and used to cut out
 magnet_height = 5;
-magnet_radius = 3.7;
+magnet_radius = 12.71/2;
 
-flange_radius = 10;
+frame_heigh = 5;
 
-mag_width_oc  = 140;
-mag_height_oc = 100;
+flange_radius = magnet_radius + 2;
 
-mag_z_offset  = 5;
+//on center spacing of magnets on the back of ipad
+mag_width_oc  = 222;
+mag_height_oc = 100; 
+mag_cone = .25; //wedge magnets in 
+
+mag_z_offset  = 3;
+
+center_cir = 30;
+
 
 
 difference(){
 union(){
-	hull(){
-		cylinder(13,5, 5);
-		linear_extrude(5)
-			hull(){
-			translate([mag_width_oc/2,mag_height_oc/2, 0])
-				circle(flange_radius);
-
-			translate([-mag_width_oc/2,mag_height_oc/2, 0])
-				circle(flange_radius);
-				
-			translate([-mag_width_oc/2,-mag_height_oc/2, 0])
-				circle(flange_radius);
-
-			translate([mag_width_oc/2,-mag_height_oc/2, 0])
-				circle(flange_radius);
+	//hull(){
+	union(){
+		//cylinder(13,5, 5);
+		union(){
+			hull(){	
+				cylinder(10, center_cir, 5.5);
+				translate([mag_width_oc/2,mag_height_oc/2, 0])
+					cylinder(frame_heigh, flange_radius, flange_radius);
 			}
+			hull(){
+				cylinder(10, center_cir, 5.5);
+				translate([-mag_width_oc/2,mag_height_oc/2, 0])
+					cylinder(frame_heigh, flange_radius, flange_radius);
+			}
+			hull(){
+				cylinder(10, center_cir, 5.5);
+				translate([-mag_width_oc/2,-mag_height_oc/2, 0])
+					cylinder(frame_heigh, flange_radius, flange_radius);
+			}
+			hull(){
+				cylinder(10, center_cir, 5.5);
+				translate([mag_width_oc/2,-mag_height_oc/2, 0])
+					cylinder(frame_heigh, flange_radius, flange_radius);
+			}
+		}
 	}
 	cylinder(20,5.5, 5.5);
 	translate([0,0,28])
@@ -38,18 +55,17 @@ union(){
 //cut out magnets
 translate([0,0,3]){
 	translate([mag_width_oc/2,mag_height_oc/2, 0])
-		cylinder(magnet_radius, magnet_height, magnet_height);
+		cylinder(magnet_height, magnet_radius, magnet_radius+mag_cone);
 
 	translate([-mag_width_oc/2,mag_height_oc/2, 0])
-		cylinder(magnet_radius, magnet_height, magnet_height);
+		cylinder(magnet_height, magnet_radius, magnet_radius+mag_cone);
 		
 	translate([-mag_width_oc/2,-mag_height_oc/2, 0])
-		cylinder(magnet_radius, magnet_height, magnet_height);
+		cylinder(magnet_height, magnet_radius, magnet_radius+mag_cone);
 
 	translate([mag_width_oc/2,-mag_height_oc/2, 0])
-		cylinder(magnet_radius, magnet_height, magnet_height);
+		cylinder(magnet_height, magnet_radius, magnet_radius+mag_cone);
 }
-
 // bolt cutout
 translate([0,0,38])
 	cylinder(10, 3, 3, $fn=6);
