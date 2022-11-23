@@ -6,3 +6,5 @@ Most of this is parametrized so if you locate the magnetic spots on an iPad you 
 This was made for a 12.9" 4th gen iPad Pro.
 
 ![mount](./ipad_ram.scad.png?raw=true)
+
+PLA should be enough for this model, the captive nut bolt is for added strength in the RAM mount.
