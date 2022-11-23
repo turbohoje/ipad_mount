@@ -67,12 +67,12 @@ translate([0,0,mag_z_offset]){
 		cylinder(magnet_height, magnet_radius, magnet_radius+mag_cone);
 }
 // bolt cutout
-translate([0,0,38])
-	cylinder(10, 3, 3, $fn=6);
+translate([0,0,37])
+	cylinder(11, 11/2, 11/2, $fn=6);
 
 translate([0,0,-1])
-	cylinder(60, 1.5, 1.5);
+	cylinder(60, 4.8/2, 4.8/2);
 
 translate([0,0,-.1])
-	cylinder(4, 4, 0);
+	cylinder(5.1, 5.1, 0);
 }
